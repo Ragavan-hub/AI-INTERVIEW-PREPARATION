@@ -53,8 +53,11 @@ Output ONLY a valid JSON array of strings containing the questions, like: ["Ques
 
     return NextResponse.json({ interviewId: newInterview._id, questions: questionsArray }, { status: 200 });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error("Generate error:", error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ 
+      error: 'Internal server error', 
+      message: error.message || error.toString() 
+    }, { status: 500 });
   }
 }

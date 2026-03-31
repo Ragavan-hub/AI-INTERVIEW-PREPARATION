@@ -49,10 +49,10 @@ export default function Dashboard() {
       if (res.ok && data.interviewId) {
         router.push(`/interview/${data.interviewId}`);
       } else {
-        alert("Failed to generate interview. Please try again.");
+        alert(`Failed to generate interview: ${data?.message || data?.error || "Please try again."}`);
       }
-    } catch (error) {
-      alert("An error occurred.");
+    } catch (error: any) {
+      alert(`An error occurred: ${error.message || "Unknown error."}`);
     } finally {
       setLoading(false);
     }

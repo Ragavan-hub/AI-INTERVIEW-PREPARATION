@@ -23,8 +23,11 @@ export async function POST(req: Request) {
     await User.create({ name, email, password: hashedPassword });
 
     return NextResponse.json({ message: "User registered successfully." }, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
-    return NextResponse.json({ message: "An error occurred while registering the user." }, { status: 500 });
+    return NextResponse.json(
+      { message: "An error occurred while registering the user.", error: error.message || error.toString() },
+      { status: 500 }
+    );
   }
 }
